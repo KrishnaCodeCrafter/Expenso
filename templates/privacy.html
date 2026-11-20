@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Expenso{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="auth-container">
+
+        <div class="auth-header">
+            <h1 class="auth-title">Privacy Policy</h1>
+            <p class="auth-subtitle">Last updated: November 21, 2026</p>
+        </div>
+
+        <div class="auth-card">
+            <h2>Information We Collect</h2>
+            <p>We collect information you provide directly to us, including your name, email address, and any expense data you enter into the Service. We may also collect information about your device and usage of the Service.</p>
+
+            <h2>Use of Information</h2>
+            <p>We use the information we collect to provide, maintain, and improve the Service. This includes processing your expenses, generating reports, and communicating with you about the Service.</p>
+
+            <h2>Data Storage and Security</h2>
+            <p>Your data is stored securely using industry-standard measures. While we strive to protect your information, we cannot guarantee absolute security. You are responsible for protecting your account credentials.</p>
+
+            <h2>Data Sharing</h2>
+            <p>We do not sell, trade, or rent your personal information to third parties. We may share your information with trusted third parties who assist us in operating the Service, but only to the extent necessary to provide the Service to you.</p>
+
+            <h2>Data Retention</h2>
+            <p>We retain your data for as long as your account is active and as necessary to provide the Service. You may delete your account and request deletion of your data at any time.</p>
+
+            <h2>Your Rights</h2>
+            <p>You have the right to access, correct, or delete your personal data. You may also export your expense data at any time through your account settings.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us through the Service.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+            <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
