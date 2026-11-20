@@ -392,7 +392,7 @@ a { color: inherit; text-decoration: none; }
 
 .auth-title {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
     color: var(--ink);
     margin-bottom: 0.5rem;
 }
@@ -406,8 +406,12 @@ a { color: inherit; text-decoration: none; }
     background: var(--paper-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 2rem;
+    padding: 2.5rem 1.75rem;
     margin-bottom: 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .auth-card h2 {
@@ -568,4 +572,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 600px) {
     .nav-links a:not(.nav-cta) { display: none; }
     .hero { padding: 3rem 1rem 2rem; }
+}
+
+@media (max-width: 500px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+        max-width: 95%;
+    }
 }
