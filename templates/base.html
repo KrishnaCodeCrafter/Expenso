@@ -26,35 +26,13 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-inner">
-            <a href="{{ url_for('landing') }}" class="nav-brand">
-                <span class="brand-icon">◈</span>
-                <span class="brand-name">Expenso</span>
-            </a>
-            <div class="nav-links">
-                <a href="{{ url_for('login') }}">Sign in</a>
-                <a href="{{ url_for('register') }}" class="nav-cta">Create free account</a>
-                {% include '_theme_toggle.html' %}
-            </div>
-        </div>
-    </nav>
+    {% include '_header.html' %}
 
     <main class="main-content">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="footer">
-        <div class="footer-inner">
-            <span class="brand-icon">◈</span>
-            <span class="footer-name">Expenso</span>
-            <p class="footer-copy">Track every rupee. Own your finances.</p>
-            <div class="footer-links-bottom">
-                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
-                <a href="{{ url_for('privacy') }}">Privacy Policy</a>
-            </div>
-        </div>
-    </footer>
+    {% include '_footer.html' %}
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}
