@@ -18,19 +18,41 @@
     let themeToggleTooltip = null;
 
     /**
+     * Get stored theme from localStorage with safety
+     * @returns {string|null} The stored theme or null if not set/error
+     */
+    function getStoredTheme() {
+        try {
+            return localStorage.getItem(THEME_KEY);
+        } catch (e) {
+            return null;
+        }
+    }
+
+    /**
+     * Set theme in localStorage with safety
+     * @param {string} theme - 'light' or 'dark'
+     */
+    function setStoredTheme(theme) {
+        try {
+            localStorage.setItem(THEME_KEY, theme);
+        } catch (e) {
+            // localStorage blocked or unavailable - silently fail
+        }
+    }
+
+    /**
      * Initialize theme system
      */
     function initTheme() {
-        // Get saved theme or detect system preference
-        const savedTheme = localStorage.getItem(THEME_KEY);
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (prefersDark ? DARK_THEME : LIGHT_THEME);
+        // Get saved theme or default to light (no prefers-color-scheme)
+        const savedTheme = getStoredTheme();
+        const initialTheme = (savedTheme === LIGHT_THEME || savedTheme === DARK_THEME)
+            ? savedTheme
+            : LIGHT_THEME;
 
         // Apply theme immediately
         applyTheme(initialTheme);
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleSystemThemeChange);
 
         // Initialize toggle button after DOM is ready
         if (document.readyState === 'loading') {
@@ -73,7 +95,7 @@
         applyTheme(newTheme);
 
         // Save to localStorage
-        localStorage.setItem(THEME_KEY, newTheme);
+        setStoredTheme(newTheme);
 
         // Update button state
         updateToggleButton();
@@ -101,6 +123,9 @@
         const currentTheme = document.documentElement.getAttribute(THEME_ATTR);
         const isDark = currentTheme === DARK_THEME;
 
+        // Update aria-pressed for accessibility
+        themeToggleBtn.setAttribute('aria-pressed', isDark);
+
         // Update aria-label
         themeToggleBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 
@@ -120,20 +145,6 @@
     }
 
     /**
-     * Handle system theme change
-     * Only auto-switch if user hasn't explicitly set a preference
-     * @param {MediaQueryListEvent} e
-     */
-    function handleSystemThemeChange(e) {
-        const savedTheme = localStorage.getItem(THEME_KEY);
-        if (!savedTheme) {
-            const newTheme = e.matches ? DARK_THEME : LIGHT_THEME;
-            applyTheme(newTheme);
-            updateToggleButton();
-        }
-    }
-
-    /**
      * Get current theme
      * @returns {string} Current theme ('light' or 'dark')
      */
@@ -148,7 +159,7 @@
     function setTheme(theme) {
         if (theme !== LIGHT_THEME && theme !== DARK_THEME) return;
         applyTheme(theme);
-        localStorage.setItem(THEME_KEY, theme);
+        setStoredTheme(theme);
         updateToggleButton();
     }
 
