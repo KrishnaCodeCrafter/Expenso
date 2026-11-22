@@ -1,7 +1,10 @@
 <footer class="footer">
     <div class="footer-inner">
-        <span class="brand-icon">◈</span>
-        <span class="footer-name">Expenso</span>
+        <a href="{{ url_for('landing') }}" class="footer-brand-link">
+            <img src="{{ url_for('static', filename='Brand name.png') }}" alt="Brand Name" class="footer-name-img">
+            <img src="{{ url_for('static', filename='Light mode brand logo.png') }}" alt="Expenso Logo" class="footer-logo logo-light">
+            <img src="{{ url_for('static', filename='Dark mode brand logo.png') }}" alt="Expenso Logo" class="footer-logo logo-dark">
+        </a>
         <p class="footer-copy">Track every rupee. Own your finances.</p>
         <div class="footer-links-bottom">
             <a href="{{ url_for('terms') }}">Terms and Conditions</a>
