@@ -41,6 +41,50 @@
     --success-light: #ccfbf1; /* Teal-100 */
     --success-text: #0d9488;  /* Teal-600 */
 
+    /* Text colors for accent and danger backgrounds */
+    --on-accent: var(--paper);
+    --on-danger: var(--paper);
+
+    /* Circle shadow color */
+    --circle-shadow: rgba(0, 0, 0, 0.15);
+    /* ================================================================ */
+    /* LIGHT MODE - Premium Financial SaaS Palette                       */
+    /* ================================================================ */
+    /* Core neutrals - warm gray scale for premium feel */
+    --ink: #0f172a;           /* Primary text - near black with blue undertone */
+    --ink-soft: #334155;      /* Secondary text */
+    --ink-muted: #64748b;     /* Muted text */
+    --ink-faint: #94a3b8;     /* Placeholder/disabled text */
+
+    /* Background hierarchy - warm white scale */
+    --paper: #f8fafc;         /* Page background */
+    --paper-rgb: 248, 250, 252;
+    --paper-warm: #f1f5f9;    /* Section backgrounds */
+    --paper-card: #ffffff;    /* Card surfaces */
+
+    /* Brand accent - Emerald/Teal (professional fintech green) */
+    --accent: #0d9488;        /* Primary brand color - teal-600 */
+    --accent-hover: #0f766e;  /* Hover state - teal-700 */
+    --accent-light: #ccfbf1;  /* Light backgrounds - teal-100 */
+    --accent-muted: #5eead4;  /* Subtle accents - teal-300 */
+
+    /* Secondary accent - Amber/Gold (for highlights, warnings) */
+    --accent-2: #d97706;      /* Amber-600 */
+    --accent-2-hover: #b45309; /* Amber-700 */
+    --accent-2-light: #fef3c7; /* Amber-100 */
+    --accent-2-muted: #fcd34d; /* Amber-300 */
+
+    /* Status colors - aligned with accent hue family */
+    --danger: #dc2626;        /* Red-600 */
+    --danger-hover: #b91c1c;  /* Red-700 */
+    --danger-light: #fef2f2;  /* Red-50 */
+    --danger-muted: #fca5a5;  /* Red-300 */
+
+    --success: #0d9488;       /* Same as accent (teal) */
+    --success-hover: #0f766e; /* Teal-700 */
+    --success-light: #ccfbf1; /* Teal-100 */
+    --success-text: #0d9488;  /* Teal-600 */
+
     /* Borders - subtle, warm */
     --border: #e2e8f0;        /* Default borders - slate-200 */
     --border-soft: #f1f5f9;   /* Subtle borders - slate-100 */
@@ -120,6 +164,10 @@
     --success-light: #0f4d46; /* Dark teal backgrounds */
     --success-text: #14b8a6;  /* Teal-500 */
 
+    /* Text colors for accent and danger backgrounds */
+    --on-accent: #0f172a;
+    --on-danger: #0f172a;
+
     /* Borders - subtle on dark */
     --border: #334155;        /* Slate-700 */
     --border-soft: #1e293b;   /* Slate-800 */
@@ -145,6 +193,18 @@
         --transition-fast: 0ms;
         --transition-normal: 0ms;
         --transition-slow: 0ms;
+    }
+}
+
+/* Theme transition class - apply transitions to all elements when theme changes */
+.theme-transitioning * {
+    transition: background-color var(--transition-normal), color var(--transition-normal), border-color var(--transition-normal), fill var(--transition-normal), stroke var(--transition-normal);
+}
+
+/* Disable theme-transitioning transitions under reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .theme-transitioning * {
+        transition: none !important;
     }
 }
 
@@ -233,15 +293,15 @@ a { color: inherit; text-decoration: none; }
 .nav-links a { color: var(--ink-muted); transition: color var(--transition-fast); }
 .nav-links a:hover { color: var(--ink); }
 
-.nav-cta {
-    background: var(--ink) !important;
-    color: var(--paper) !important;
+.nav-links .nav-cta {
+    background: var(--ink);
+    color: var(--paper);
     padding: 0.5rem 1.25rem;
     border-radius: var(--radius-sm);
-    transition: background var(--transition-fast), color var(--transition-fast) !important;
+    transition: background var(--transition-fast), color var(--transition-fast);
 }
 
-.nav-cta:hover { background: var(--accent) !important; color: var(--paper) !important; }
+.nav-links .nav-cta:hover { background: var(--accent); color: var(--paper); }
 
 /* Theme Toggle Button */
 .theme-toggle {
@@ -444,18 +504,13 @@ a { color: inherit; text-decoration: none; }
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px var(--circle-shadow);
 }
 
 .circle-red { background: var(--danger); }
 .circle-yellow { background: var(--accent-2); }
 .circle-green { background: var(--success-text); }
 
-.mock-month {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-}
 
 .mock-stats-row {
     display: grid;
@@ -563,7 +618,7 @@ a { color: inherit; text-decoration: none; }
     white-space: nowrap;
 }
 
-.btn-primary:hover { background: var(--accent); }
+.btn-primary:hover { background: var(--accent); color: var(--on-accent); }
 .btn-primary:active { transform: scale(0.985); }
 
 .btn-secondary {
@@ -572,7 +627,7 @@ a { color: inherit; text-decoration: none; }
     justify-content: center;
     gap: 0.5rem;
     background: var(--accent);
-    color: var(--paper);
+    color: var(--on-accent);
     padding: 0.625rem 1.5rem;
     border-radius: var(--radius-sm);
     font-family: var(--font-body);
@@ -585,7 +640,7 @@ a { color: inherit; text-decoration: none; }
     white-space: nowrap;
 }
 
-.btn-secondary:hover { background: var(--accent-hover); }
+.btn-secondary:hover { background: var(--accent-hover); color: var(--on-accent); }
 .btn-secondary:active { transform: scale(0.985); }
 
 .btn-ghost {
@@ -617,7 +672,7 @@ a { color: inherit; text-decoration: none; }
     justify-content: center;
     gap: 0.5rem;
     background: var(--danger);
-    color: var(--paper);
+    color: var(--on-danger);
     padding: 0.625rem 1.5rem;
     border-radius: var(--radius-sm);
     font-family: var(--font-body);
@@ -629,7 +684,7 @@ a { color: inherit; text-decoration: none; }
     text-decoration: none;
 }
 
-.btn-danger:hover { background: var(--danger-hover); }
+.btn-danger:hover { background: var(--danger-hover); color: var(--on-danger); }
 
 /* ------------------------------------------------------------------ */
 /* Features section                                                    */
@@ -1065,25 +1120,6 @@ a { color: inherit; text-decoration: none; }
 .gap-4 { gap: 1rem; }
 
 .w-full { width: 100%; }
-
-/* ------------------------------------------------------------------ */
-/* Theme transition overlay (prevents flash)                           */
-/* ------------------------------------------------------------------ */
-
-.theme-transition-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--paper);
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0ms;
-}
-
-.theme-transition-overlay.active {
-    opacity: 1;
-    transition: opacity var(--transition-normal);
-}
 
 /* ------------------------------------------------------------------ */
 /* Print styles                                                        */
