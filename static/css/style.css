@@ -129,62 +129,59 @@
 /* Same hue family, adjusted lightness for dark surfaces            */
 /* ================================================================ */
 [data-theme="dark"] {
-    /* Core neutrals - slate scale inverted */
-    --ink: #f8fafc;           /* Primary text - near white */
-    --ink-soft: #e2e8f0;      /* Secondary text */
-    --ink-muted: #94a3b8;     /* Muted text */
-    --ink-faint: #64748b;     /* Placeholder/disabled text */
+    /* Core neutrals - softer beige/cream on black */
+    --ink: #fdf6e3;           /* Primary text - cream-ish */
+    --ink-soft: #ede0c6;      /* Secondary text - light beige */
+    --ink-muted: #d4c0a1;     /* Muted text - muted beige */
+    --ink-faint: #85745e;     /* Placeholder - darker beige */
 
-    /* Background hierarchy - deep slate scale */
-    --paper: #0f172a;         /* Page background - slate-950 */
-    --paper-rgb: 15, 23, 42;
-    --paper-warm: #1e293b;    /* Section backgrounds - slate-800 */
-    --paper-card: #1e293b;    /* Card surfaces - slate-800 */
+    /* Background hierarchy - Midnight Black */
+    --paper: #020617;         /* Page background */
+    --paper-rgb: 2, 6, 23;
+    --paper-warm: #080a18;    /* Section backgrounds */
+    --paper-card: #0c0f1e;    /* Card surfaces */
 
-    /* Brand accent - Same hue, brighter for dark mode */
-    --accent: #14b8a6;        /* Teal-500 - brighter for dark bg */
-    --accent-hover: #2dd4bf;  /* Teal-400 */
-    --accent-light: #0f4d46;  /* Dark teal backgrounds */
-    --accent-muted: #0d9488;  /* Subtle accents */
+    /* Brand accent - vibrant teal (remains consistent) */
+    --accent: #2dd4bf;
+    --accent-hover: #5eead4;
+    --accent-light: #0d3632;
+    --accent-muted: #115e59;
 
-    /* Secondary accent - Same hue, adjusted */
-    --accent-2: #fbbf24;      /* Amber-400 */
-    --accent-2-hover: #fcd34d; /* Amber-300 */
-    --accent-2-light: #45300a; /* Dark amber backgrounds */
-    --accent-2-muted: #d97706; /* Subtle accents */
+    /* Secondary accent - amber (remains consistent) */
+    --accent-2: #fbbf24;
+    --accent-2-hover: #fcd34d;
+    --accent-2-light: #45300a;
+    --accent-2-muted: #78350f;
 
-    /* Status colors - adjusted for dark mode */
-    --danger: #ef4444;        /* Red-500 */
-    --danger-hover: #f87171;  /* Red-400 */
-    --danger-light: #450a0a;  /* Dark red backgrounds */
-    --danger-muted: #dc2626;  /* Subtle */
+    /* Status colors */
+    --danger: #f87171;
+    --danger-hover: #fca5a5;
+    --danger-light: #450a0a;
+    --danger-muted: #991b1b;
 
-    --success: #14b8a6;       /* Teal-500 */
-    --success-hover: #2dd4bf; /* Teal-400 */
-    --success-light: #0f4d46; /* Dark teal backgrounds */
-    --success-text: #14b8a6;  /* Teal-500 */
+    --success: #2dd4bf;
+    --success-hover: #5eead4;
+    --success-light: #0d3632;
+    --success-text: #2dd4bf;
 
-    /* Text colors for accent and danger backgrounds */
-    --on-accent: #0f172a;
-    --on-danger: #0f172a;
+    /* Text on colored backgrounds */
+    --on-accent: #020617;
+    --on-danger: #020617;
 
-    /* Borders - subtle on dark */
-    --border: #334155;        /* Slate-700 */
-    --border-soft: #1e293b;   /* Slate-800 */
-    --border-strong: #475569; /* Slate-600 */
+    /* Borders - dark mode refined */
+    --border: #2d261e;        /* Subtle warm borders */
+    --border-soft: #0f172a;   /* Slate-900 */
+    --border-strong: #4a4135; /* Warm dark borders */
 
-    /* Shadows - subtle, no harsh black */
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.25);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.45), 0 8px 16px rgba(0, 0, 0, 0.3);
+    /* Shadows - softer */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.7), 0 4px 8px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.6);
 
-    /* Elevated surface for modals/dropdowns */
-    --surface-elevated: #334155; /* Slate-700 */
-
-    /* Focus ring for dark */
-    --focus-ring: 0 0 0 3px var(--accent-light);
+    --surface-elevated: #1e293b;
+    --focus-ring: 0 0 0 3px #3d3326;
 }
 
 /* Respect reduced motion preference */
@@ -295,6 +292,22 @@ a { color: inherit; text-decoration: none; }
 }
 
 [data-theme="dark"] .logo-dark {
+    display: block;
+}
+
+.name-light {
+    display: block;
+}
+
+.name-dark {
+    display: none;
+}
+
+[data-theme="dark"] .name-light {
+    display: none;
+}
+
+[data-theme="dark"] .name-dark {
     display: block;
 }
 
@@ -1027,6 +1040,22 @@ a { color: inherit; text-decoration: none; }
 
 .footer-inner .logo-dark {
     display: none;
+}
+
+.footer-inner .name-light {
+    display: block;
+}
+
+.footer-inner .name-dark {
+    display: none;
+}
+
+[data-theme="dark"] .footer-inner .name-light {
+    display: none;
+}
+
+[data-theme="dark"] .footer-inner .name-dark {
+    display: block;
 }
 
 [data-theme="dark"] .footer-inner .logo-light {

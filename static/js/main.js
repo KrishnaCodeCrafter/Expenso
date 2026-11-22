@@ -45,11 +45,11 @@
      * Initialize theme system
      */
     function initTheme() {
-        // Get saved theme or default to light (no prefers-color-scheme)
+        // Get saved theme or default to dark
         const savedTheme = getStoredTheme();
         const initialTheme = (savedTheme === LIGHT_THEME || savedTheme === DARK_THEME)
             ? savedTheme
-            : LIGHT_THEME;
+            : DARK_THEME;
 
         // Apply theme immediately
         applyTheme(initialTheme);
@@ -149,7 +149,7 @@
      * @returns {string} Current theme ('light' or 'dark')
      */
     function getCurrentTheme() {
-        return document.documentElement.getAttribute(THEME_ATTR) || LIGHT_THEME;
+        return document.documentElement.getAttribute(THEME_ATTR) || DARK_THEME;
     }
 
     /**
