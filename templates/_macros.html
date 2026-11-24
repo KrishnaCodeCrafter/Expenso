@@ -1,0 +1,8 @@
+{% macro brand_link(show_logo=true, css_class='nav-brand', logo_class='brand-logo', name_class='brand-name-img') %}
+    <a href="{{ url_for('landing') }}" class="{{ css_class }}">
+        {% if show_logo %}
+        <img src="{{ url_for('static', filename='Dark mode brand logo.png') }}" alt="Expenso Logo" class="{{ logo_class }}">
+        {% endif %}
+        <img src="{{ url_for('static', filename='Dark mode Brand name.png') }}" alt="Brand Name" class="{{ name_class }}">
+    </a>
+{% endmacro %}

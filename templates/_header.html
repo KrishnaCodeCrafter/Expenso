@@ -1,9 +1,8 @@
+{% from '_macros.html' import brand_link %}
+
 <nav class="navbar">
     <div class="nav-inner">
-        <a href="{{ url_for('landing') }}" class="nav-brand">
-            <img src="{{ url_for('static', filename='Dark mode brand logo.png') }}" alt="Expenso Logo" class="brand-logo">
-            <img src="{{ url_for('static', filename='Dark mode Brand name.png') }}" alt="Brand Name" class="brand-name-img">
-        </a>
+        {{ brand_link(show_logo=true, css_class='nav-brand', logo_class='brand-logo', name_class='brand-name-img') }}
         <div class="nav-links">
             <a href="{{ url_for('login') }}">Sign in</a>
             <a href="{{ url_for('register') }}" class="nav-cta">Create free account</a>

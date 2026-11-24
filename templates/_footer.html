@@ -1,8 +1,8 @@
+{% from '_macros.html' import brand_link %}
+
 <footer class="footer">
     <div class="footer-inner">
-        <a href="{{ url_for('landing') }}" class="footer-brand-link">
-            <img src="{{ url_for('static', filename='Dark mode Brand name.png') }}" alt="Brand Name" class="footer-name-img">
-        </a>
+        {{ brand_link(show_logo=false, css_class='footer-brand-link', name_class='footer-name-img') }}
         <p class="footer-copy">Track every rupee. Own your finances.</p>
         <div class="footer-links-bottom">
             <a href="{{ url_for('terms') }}">Terms and Conditions</a>
