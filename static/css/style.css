@@ -23,9 +23,7 @@
 
     /* Secondary accent - amber (remains consistent) */
     --accent-2: #fbbf24;
-    --accent-2-hover: #fcd34d;
     --accent-2-light: #45300a;
-    --accent-2-muted: #78350f;
 
     /* Status colors */
     --danger: #f87171;
@@ -33,10 +31,8 @@
     --danger-light: #450a0a;
     --danger-muted: #991b1b;
 
+    /* Success uses the same teal as accent for brand consistency */
     --success: #2dd4bf;
-    --success-hover: #5eead4;
-    --success-light: #0d3632;
-    --success-text: #2dd4bf;
 
     /* Text on colored backgrounds */
     --on-accent: #020617;
@@ -193,9 +189,6 @@ a { color: inherit; text-decoration: none; }
 
 /* ------------------------------------------------------------------ */
 /* Main                                                                */
-
-/* ------------------------------------------------------------------ */
-/* Main                                                                */
 /* ------------------------------------------------------------------ */
 
 .main-content { min-height: calc(100vh - 64px - 120px); }
@@ -318,7 +311,7 @@ a { color: inherit; text-decoration: none; }
 
 .circle-red { background: var(--danger); }
 .circle-yellow { background: var(--accent-2); }
-.circle-green { background: var(--success-text); }
+.circle-green { background: var(--success); }
 
 
 .mock-stats-row {
@@ -359,7 +352,7 @@ a { color: inherit; text-decoration: none; }
     font-weight: 500;
 }
 
-.mock-sub-green { color: var(--success-text); }
+.mock-sub-green { color: var(--success); }
 .mock-sub-accent { color: var(--accent); }
 .mock-sub-muted { color: var(--ink-muted); }
 
