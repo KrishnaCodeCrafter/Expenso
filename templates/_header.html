@@ -1,15 +1,12 @@
 <nav class="navbar">
     <div class="nav-inner">
         <a href="{{ url_for('landing') }}" class="nav-brand">
-            <img src="{{ url_for('static', filename='Light mode Brand name.png') }}" alt="Brand Name" class="brand-name-img name-light">
-            <img src="{{ url_for('static', filename='Dark mode Brand name.png') }}" alt="Brand Name" class="brand-name-img name-dark">
-            <img src="{{ url_for('static', filename='Light mode brand logo.png') }}" alt="Expenso Logo" class="brand-logo logo-light">
-            <img src="{{ url_for('static', filename='Dark mode brand logo.png') }}" alt="Expenso Logo" class="brand-logo logo-dark">
+            <img src="{{ url_for('static', filename='Dark mode Brand name.png') }}" alt="Brand Name" class="brand-name-img">
+            <img src="{{ url_for('static', filename='Dark mode brand logo.png') }}" alt="Expenso Logo" class="brand-logo">
         </a>
         <div class="nav-links">
             <a href="{{ url_for('login') }}">Sign in</a>
             <a href="{{ url_for('register') }}" class="nav-cta">Create free account</a>
-            {% include '_theme_toggle.html' %}
         </div>
     </div>
 </nav>

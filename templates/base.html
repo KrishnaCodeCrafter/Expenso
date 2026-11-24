@@ -10,17 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block head %}{% endblock %}
-    <!-- Do not move this script - it must stay in sync with initTheme() in main.js -->
-    <script>
-        (function() {
-            try {
-                var theme = localStorage.getItem('theme');
-                if (theme === 'light') {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                }
-            } catch (e) {}
-        })();
-    </script>
 </head>
 <body>
 

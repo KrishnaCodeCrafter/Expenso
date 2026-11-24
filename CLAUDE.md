@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Expense Tracker (Expenso)** - A Flask-based personal finance expense tracking application with a modern, responsive UI featuring light/dark mode theming.
+**Expense Tracker (Expenso)** - A Flask-based personal finance expense tracking application with a modern, responsive UI featuring dark mode theming.
 
 ## Development Setup
 
@@ -60,42 +60,39 @@ expense-tracker/
 │   ├── terms.html      # Terms and conditions
 │   ├── privacy.html    # Privacy policy
 │   ├── _header.html    # Navigation bar component
-│   ├── _footer.html    # Footer component
-│   └── _theme_toggle.html  # Dark/light mode toggle button
+│   └── _footer.html    # Footer component
 ├── requirements.txt    # Python dependencies
 └── .gitignore
 ```
 
 ## Architecture & Design System
 
-### Theme System (Dark/Light Mode)
+### Theme System (Dark Mode Only)
 
 The application uses a CSS custom properties approach with a `data-theme` attribute on the `<html>` element:
 
-**Default Theme**: Dark mode is the default on first visit
+**Default Theme**: Dark mode is the default and only theme
 
 **Theme Variables**:
-- **Light Mode**: Located in `:root` - uses warm grayscale and teal (#0d9488) accent palette
-- **Dark Mode**: Located in `[data-theme="dark"]` - uses cream/beige text on midnight black backgrounds with vibrant teal accents
+- **Dark Mode**: Located in `:root` - uses cream/beige text on midnight black backgrounds with vibrant teal accents
 
 **Key Theme Colors**:
-- `--ink`: Primary text color
-- `--paper`: Page background
-- `--accent`: Primary brand color (teal)
+- `--ink`: Primary text color (cream-ish)
+- `--paper`: Page background (midnight black)
+- `--accent`: Primary brand color (vibrant teal)
 - `--accent-2`: Secondary accent (amber/gold)
 - `--danger`: Error state (red)
 - `--success`: Success state (teal)
 
-### Theme Toggle Implementation
+### Theme Management
 
 Theme is managed via `main.js` ThemeManager:
+- Sets dark theme by default
 - Persists preference in `localStorage` under key `theme`
 - Uses `data-theme` attribute for CSS scoping
-- Smooth CSS transitions coordinated with theme class
 
 Logo/Brand Visibility:
-- `.logo-light`, `.name-light` - visible only in light mode
-- `.logo-dark`, `.name-dark` - visible only in dark mode
+- `.brand-img` - displays dark mode brand images only
 
 ### File Organization
 
@@ -121,11 +118,11 @@ Logo/Brand Visibility:
 ## Frontend Guidelines
 
 1. **Brand Images**: Use consistent naming conventions:
-   - `Dark mode brand logo.png` / `Light mode brand logo.png`
-   - `Dark mode Brand name.png` / `Light mode Brand name.png`
+   - `Dark mode brand logo.png`
+   - `Dark mode Brand name.png`
 
 2. **CSS Structure**: Variables first, then reset, then components
 
-3. **Accessibility**: Theme toggle has `aria-label`, `aria-pressed`, and keyboard support
+3. **Accessibility**: Focus styles are implemented for interactive elements
 
 4. **Responsive**: Mobile-first with breakpoints at 900px and 600px
