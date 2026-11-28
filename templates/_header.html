@@ -4,8 +4,14 @@
     <div class="nav-inner">
         {{ brand_link(show_logo=true, css_class='nav-brand', logo_class='brand-logo', name_class='brand-name-img') }}
         <div class="nav-links">
+            {% if session.user_id %}
+            <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
+                <button type="submit" class="nav-link-btn" style="background:none; border:none; cursor:pointer; color:var(--ink);">Logout</button>
+            </form>
+            {% else %}
             <a href="{{ url_for('login') }}">Sign in</a>
             <a href="{{ url_for('register') }}" class="nav-cta">Create free account</a>
+            {% endif %}
         </div>
     </div>
 </nav>

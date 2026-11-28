@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
-from database.db import init_db, seed_db, create_user
+from database.db import init_db, seed_db, create_user, verify_user, get_db
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-for-expenso')
@@ -22,6 +22,9 @@ def landing():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if 'user_id' in session:
+        return redirect(url_for("profile"))
+
     if request.method == "GET":
         return render_template("register.html")
 
@@ -40,8 +43,6 @@ def register():
         return render_template("register.html", error="Password is required.")
     if len(password) < 8:
         return render_template("register.html", error="Password must be at least 8 characters.")
-    if password != confirm_password:
-        return render_template("register.html", error="Passwords do not match.")
 
     success, error = create_user(name, email, password)
     if success:
@@ -49,10 +50,48 @@ def register():
     return render_template("register.html", error=error)
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if 'user_id' in session:
+        return redirect(url_for("profile"))
+
     registered = request.args.get("registered") == "1"
-    return render_template("login.html", registered=registered)
+    if request.method == "GET":
+        return render_template("login.html", registered=registered)
+
+    # POST request - process login
+    email = request.form.get("email", "").strip().lower()
+    password = request.form.get("password", "")
+
+    # Validation
+    if not email:
+        flash("Email is required.", "error")
+        return render_template("login.html")
+    if not password:
+        flash("Password is required.", "error")
+        return render_template("login.html")
+
+    # Verify credentials
+    user = verify_user(email, password)
+    if user:
+        session['user_id'] = user['id']
+        session['user_name'] = user['name']
+        session['user_email'] = user['email']
+        flash("Welcome back!", "success")
+        return redirect(url_for("profile"))
+
+    # Check if email exists
+    conn = get_db()
+    try:
+        cursor = conn.execute('SELECT id FROM users WHERE email = ?', (email,))
+        if cursor.fetchone():
+            flash("Invalid password.", "error")
+        else:
+            flash("No account found with this email.", "error")
+    finally:
+        conn.close()
+
+    return render_template("login.html")
 
 
 @app.route("/terms")
@@ -69,13 +108,18 @@ def privacy():
 # Placeholder routes — students will implement these                  #
 # ------------------------------------------------------------------ #
 
-@app.route("/logout")
+@app.route("/logout", methods=["POST"])
 def logout():
-    return "Logout — coming in Step 3"
+    session.clear()
+    flash("Logged out successfully.", "success")
+    return redirect(url_for("landing"))
 
 
 @app.route("/profile")
 def profile():
+    if 'user_id' not in session:
+        flash("Please sign in to access your profile.", "error")
+        return redirect(url_for("login"))
     return "Profile page — coming in Step 4"
 
 
