@@ -212,5 +212,19 @@ def test_login_shows_success_message(client):
     assert b'Account created successfully' in response.data
 
 
+def test_logged_in_user_redirected_from_login_and_register(client):
+    """Test logged in user is redirected from login and register pages to profile."""
+    with client.session_transaction() as sess:
+        sess['user_id'] = 1
+
+    res_login = client.get('/login')
+    assert res_login.status_code == 302
+    assert '/profile' in res_login.location
+
+    res_register = client.get('/register')
+    assert res_register.status_code == 302
+    assert '/profile' in res_register.location
+
+
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])
