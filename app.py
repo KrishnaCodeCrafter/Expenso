@@ -1,7 +1,9 @@
-from flask import Flask, render_template
-from database.db import init_db, seed_db
+from flask import Flask, render_template, request, redirect, url_for
+import os
+from database.db import init_db, seed_db, create_user
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-for-expenso')
 
 # Initialize database on startup
 with app.app_context():
@@ -18,14 +20,39 @@ def landing():
     return render_template("landing.html")
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    if request.method == "GET":
+        return render_template("register.html")
+
+    # POST request
+    name = request.form.get("name", "").strip()
+    email = request.form.get("email", "").strip().lower()
+    password = request.form.get("password", "")
+    confirm_password = request.form.get("confirm_password", "")
+
+    # Basic validation
+    if not name:
+        return render_template("register.html", error="Full name is required.")
+    if not email or "@" not in email:
+        return render_template("register.html", error="Please enter a valid email address.")
+    if not password:
+        return render_template("register.html", error="Password is required.")
+    if len(password) < 8:
+        return render_template("register.html", error="Password must be at least 8 characters.")
+    if password != confirm_password:
+        return render_template("register.html", error="Passwords do not match.")
+
+    success, error = create_user(name, email, password)
+    if success:
+        return redirect(url_for("login", registered=1))
+    return render_template("register.html", error=error)
 
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    registered = request.args.get("registered") == "1"
+    return render_template("login.html", registered=registered)
 
 
 @app.route("/terms")
