@@ -1,6 +1,6 @@
 import sqlite3
 import os
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date, timedelta
 
 # Database file path
@@ -94,5 +94,21 @@ def create_user(name: str, email: str, password: str):
         if 'UNIQUE constraint failed: users.email' in str(e):
             return False, 'An account with this email already exists.'
         return False, 'A database error occurred.'
+    finally:
+        conn.close()
+
+
+def verify_user(email: str, password: str):
+    """Verify user credentials. Returns user dict (id, name, email) on success, None on failure."""
+    conn = get_db()
+    try:
+        cursor = conn.execute(
+            'SELECT id, name, email, password_hash FROM users WHERE email = ?',
+            (email.lower(),)
+        )
+        user = cursor.fetchone()
+        if user and check_password_hash(user['password_hash'], password):
+            return {'id': user['id'], 'name': user['name'], 'email': user['email']}
+        return None
     finally:
         conn.close()
