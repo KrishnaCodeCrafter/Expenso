@@ -78,3 +78,21 @@ def seed_db():
         conn.commit()
     finally:
         conn.close()
+
+def create_user(name: str, email: str, password: str):
+    """Create a new user. Returns (success: bool, error_message: str | None)."""
+    password_hash = generate_password_hash(password)
+    conn = get_db()
+    try:
+        conn.execute(
+            'INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)',
+            (name, email, password_hash)
+        )
+        conn.commit()
+        return True, None
+    except sqlite3.IntegrityError as e:
+        if 'UNIQUE constraint failed: users.email' in str(e):
+            return False, 'An account with this email already exists.'
+        return False, 'A database error occurred.'
+    finally:
+        conn.close()

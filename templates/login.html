@@ -17,6 +17,10 @@
             <div class="auth-error">{{ error }}</div>
             {% endif %}
 
+            {% if registered %}
+            <div class="auth-success">Account created successfully! Please sign in.</div>
+            {% endif %}
+
             <form method="POST" action="/login" class="auth-form" data-submit-text="Sign in" data-loading-text="Signing in…">
                 <div class="form-group">
                     <label for="email">Email address</label>
